@@ -20,4 +20,4 @@ jobs:
     - name: Run database migrations
       run: |
         chmod +x mybatis-migrations-3.3.9/bin/migrate
-        ./mybatis-migrations-3.3.9/bin/migrate up -c environments/development.properties
+        ./mybatis-migrations-3.3.9/bin/migrate -c environments/development.properties
