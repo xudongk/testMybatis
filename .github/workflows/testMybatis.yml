@@ -21,4 +21,4 @@ jobs:
       run: |
         cd mybatis-migrations-3.3.9/bin
         chmod +x migrate
-        ./migrate up
+        ./migrate status
