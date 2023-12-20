@@ -15,4 +15,4 @@ jobs:
     - name: Run database migrations
       run: |
         cd mybatis-migrations-3.3.9/bin
-        migrate -cp lib/ojdbc.jar -c ./database.properties up
+        migrate -cp lib/mysql-connector-java-8.0.19.jar -c ./sit.properties up
