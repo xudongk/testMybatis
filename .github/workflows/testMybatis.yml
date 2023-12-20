@@ -21,5 +21,7 @@ jobs:
       run: |
         cd mybatis-migrations-3.3.9/bin
         chmod +x migrate
-        vi /home/runner/work/testMybatis/testMybatis/mybatis-migrations-3.3.9/bin/././environments/development.properties
+        cd /home/runner/work/testMybatis/testMybatis/mybatis-migrations-3.3.9/bin/././environments
+        ls
+        pwd
         ./migrate status
