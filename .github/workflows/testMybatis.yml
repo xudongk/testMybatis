@@ -21,4 +21,5 @@ jobs:
       run: |
         cd mybatis-migrations-3.3.9/bin
         chmod +x migrate
+        ls
         migrate -cp lib/mysql-connector-java-8.0.19.jar -c ./sit.properties up
