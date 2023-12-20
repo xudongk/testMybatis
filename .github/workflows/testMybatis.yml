@@ -12,6 +12,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: 1.11
     - name: Run database migrations
       run: |
         cd mybatis-migrations-3.3.9/bin
