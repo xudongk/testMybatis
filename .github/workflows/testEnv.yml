@@ -30,7 +30,7 @@ jobs:
         cd mybatis-migrations-3.3.9/environments
         ls
         cat development2.properties
-        if [ ${{ inputs.appName = 'CMS' }} ];then
+        if [ "${{ inputs.appName" == "CMS" }} ];then
           sed -i 's,driver,driver="${{ secrets.CMS_MYSQL_DRIVER }}",g' development2.properties
           sed -i 's,url,url="${{ secrets.CMS_MYSQL_URL }}",g' development2.properties
           sed -i 's,username,username="${{ secrets.CMS_MYSQL_USERNAME }}",g' development2.properties
