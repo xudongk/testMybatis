@@ -1,17 +1,17 @@
--- // create DASHBOARD_OVERVIEW_MINUTE_DATA table
-CREATE TABLE `DASHBOARD_OVERVIEW_MINUTE_DATA`(
-    `ID` 			VARCHAR2(25),
-    `owner` 		VARCHAR2(128) NOT NULL,
-    `ownerParent` VARCHAR2(128) NOT NULL,
-    `records` 	NUMBER(8) NOT NULL,
-    `rangeMarker` TIMESTAMP NOT NULL,
-    `tag` 		VARCHAR2(10),
-    `rangeStart` 	TIMESTAMP NOT NULL,
-    `rangeEnd` 	TIMESTAMP NOT NULL,
-    `state` 	    NUMBER(1) NOT NULL,
-    `threadID` 	VARCHAR2(150) NOT NULL,
-    `sign` 	    VARCHAR2(150) NOT NULL
-);
+-- // create users table
+-- Migration SQL that makes the change goes here.
+CREATE TABLE `test3` (
+  `id` int NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO test3 (id, name, age, email) VALUES(1, '1', 0, '2');
 
 -- //@UNDO
-DROP TABLE `DASHBOARD_OVERVIEW_MINUTE_DATA`;
+-- SQL to undo the change goes here.
+
+
+drop table test3;
