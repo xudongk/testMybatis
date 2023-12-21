@@ -36,5 +36,4 @@ jobs:
           git config --global user.name "xudongk"
           git add .
           git commit -m "Add config file"
-          git remote add origin https://x-access-token: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@github.com/xudongk/testMybatis.git
           git push
