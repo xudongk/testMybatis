@@ -22,5 +22,5 @@ jobs:
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
         ./bin/migrate status
-        ./bin/migrate up
+        ./bin/migrate up --env=development2
         ./bin/migrate status
