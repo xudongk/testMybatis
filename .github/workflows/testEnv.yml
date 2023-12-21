@@ -24,7 +24,7 @@ jobs:
     - name: Run database migrations
       run: |
         echo "${{ secrets.CMS_MYSQL_DRIVER }}"
-        echo "${{ secrets.CMS_MYSQL_PASSWORD }"
+        echo "${{ secrets.CMS_MYSQL_PASSWORD }}"
         echo "${{ secrets.CMS_MYSQL_URL }}"
         echo "${{ secrets.CMS_MYSQL_USERNAME }}"
         cd mybatis-migrations-3.3.9/environments
