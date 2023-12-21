@@ -1,0 +1,39 @@
+name: Test env2
+
+on:
+  workflow_dispatch:
+    inputs:
+      json:
+        type: string
+    secrets:
+      CMS_MYSQL_DRIVER:
+        required: true
+      CMS_MYSQL_PASSWORD:
+        required: true
+      CMS_MYSQL_URL:
+        required: true
+      CMS_MYSQL_USERNAME:
+        required: true
+
+jobs:
+  download_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create config directory
+        run: mkdir -p config
+
+      - name: Create config file
+        run: |
+          echo "API_KEY=${{ secrets.CMS_MYSQL_PASSWORD }}" >> config/config.properties
+          echo "DB_PASSWORD=${{ secrets.CMS_MYSQL_USERNAME }}" >> config/config.properties
+
+      - name: Commit config file
+        run: |
+          git config --local user.email "jliwenxiao@163.com"
+          git config --local user.name "huatangli"
+          git add config/config.properties
+          git commit -m "Add config file"
+          git push
