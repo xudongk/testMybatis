@@ -1,4 +1,4 @@
--- // Create Changelog
+-- // Create Changelog 
 
 -- Default DDL for changelog table that will keep
 -- a record of the migrations that have been run.
