@@ -31,9 +31,9 @@ jobs:
         ls
         cat development2.properties
         if [ ${{ inputs.appName = 'CMS' }} ];then
-          sed -i 's,driver,driver=${{ secrets.CMS_MYSQL_DRIVER }},g' development2.properties
-          sed -i 's,url,url=${{ secrets.CMS_MYSQL_URL }},g' development2.properties
-          sed -i 's,username,username=${{ secrets.CMS_MYSQL_USERNAME }},g' development2.properties
-          sed -i 's,password,password=${{ secrets.CMS_MYSQL_USERNAME }},g' development2.properties
+          sed -i 's,driver,driver="${{ secrets.CMS_MYSQL_DRIVER }}",g' development2.properties
+          sed -i 's,url,url="${{ secrets.CMS_MYSQL_URL }}",g' development2.properties
+          sed -i 's,username,username="${{ secrets.CMS_MYSQL_USERNAME }}",g' development2.properties
+          sed -i 's,password,password="${{ secrets.CMS_MYSQL_USERNAME }}",g' development2.properties
         fi
         cat development2.properties
