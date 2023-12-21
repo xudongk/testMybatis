@@ -32,8 +32,8 @@ jobs:
 
       - name: Commit config file
         run: |
-          git config --local user.email "xudongkej@163.com"
-          git config --local user.name "xudongk"
-          git add config/config.properties
+          git config --global user.email "xudongkej@163.com"
+          git config --global user.name "xudongk"
+          git add .
           git commit -m "Add config file"
           git push
