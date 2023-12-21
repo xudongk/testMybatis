@@ -8,7 +8,7 @@ CREATE TABLE `test` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO fc.test (id, name, age, email) VALUES(1, '1', 0, '2');
+INSERT INTO test (id, name, age, email) VALUES(1, '1', 0, '2');
 
 -- //@UNDO
 -- SQL to undo the change goes here.
