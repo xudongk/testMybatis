@@ -23,17 +23,23 @@ jobs:
       uses: actions/checkout@v2
     - name: Run database migrations
       run: |
+        chmod +x mybatis-migrations-3.3.9/bin/migrate
+        cd mybatis-migrations-3.3.9
+        
         echo "${{ secrets.CMS_MYSQL_DRIVER }}"
         echo "${{ secrets.CMS_MYSQL_PASSWORD }}"
         echo "${{ secrets.CMS_MYSQL_URL }}"
         echo "${{ secrets.CMS_MYSQL_USERNAME }}"
-        cd mybatis-migrations-3.3.9/environments
+        cd environments
         ls
-        cat development2.properties
         if [ "${{ inputs.appName }}" == "CMS" ];then
-          sed -i 's,driver,driver="${{ secrets.CMS_MYSQL_DRIVER }}",g' development2.properties
-          sed -i 's,url,url="${{ secrets.CMS_MYSQL_URL }}",g' development2.properties
-          sed -i 's,username,username="${{ secrets.CMS_MYSQL_USERNAME }}",g' development2.properties
-          sed -i 's,password,password="${{ secrets.CMS_MYSQL_USERNAME }}",g' development2.properties
+          sed -i 's,driver,driver=${{ secrets.CMS_MYSQL_DRIVER }},g' development2.properties
+          sed -i 's,url,url=${{ secrets.CMS_MYSQL_URL }},g' development2.properties
+          sed -i 's,username,username=${{ secrets.CMS_MYSQL_USERNAME }},g' development2.properties
+          sed -i 's,password,password=${{ secrets.CMS_MYSQL_USERNAME }},g' development2.properties
         fi
-        cat development2.properties
+        cd ../
+        pwd
+        ./bin/migrate status --env=development2
+        ./bin/migrate up --env=development2
+        ./bin/migrate status --env=development2
