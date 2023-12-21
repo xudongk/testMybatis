@@ -13,6 +13,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Use secret
+      env:
+        MY_SECRET: ${{ secrets.CMS_MYSQL_USERNAME }}
+      run: echo "My secret value is $MY_SECRET"
     - name: Run database migrations
       run: |
         chmod +x mybatis-migrations-3.3.9/bin/migrate
