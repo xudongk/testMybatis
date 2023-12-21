@@ -1,4 +1,4 @@
-name: Download Code
+name: Test env
 
 on:
   workflow_dispatch:
