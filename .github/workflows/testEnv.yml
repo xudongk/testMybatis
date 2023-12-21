@@ -1,0 +1,29 @@
+name: Download Code
+
+on:
+  workflow_dispatch:
+    inputs:
+      json:
+        type: string
+    secrets:
+      CMS_MYSQL_DRIVER:
+        required: true
+      CMS_MYSQL_PASSWORD:
+        required: true
+      CMS_MYSQL_URL:
+        required: true
+      CMS_MYSQL_USERNAME:
+        required: true
+
+jobs:
+  download_code:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run database migrations
+      run: |
+        echo "${{ secrets.CMS_MYSQL_DRIVER}}"
+        echo "${{ secrets.CMS_MYSQL_PASSWORD}}"
+        echo "${{ secrets.CMS_MYSQL_URL}}"
+        echo "${{ secrets.CMS_MYSQL_USERNAME}}"
