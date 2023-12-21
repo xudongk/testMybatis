@@ -8,10 +8,10 @@ CREATE TABLE `test2` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO fc.test2 (id, name, age, email) VALUES(1, '1', 0, '2');
+INSERT INTO test2 (id, name, age, email) VALUES(1, '1', 0, '2');
 
 -- //@UNDO
 -- SQL to undo the change goes here.
 
 
-update fc.test2 set name='ssss' where id=1
+update test2 set name='ssss' where id=1
