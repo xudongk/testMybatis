@@ -23,6 +23,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Commit config file
+        if: hashFiles('development2.properties') != ''
         env:
           CMS_MYSQL_DRIVER: ${{ secrets.CMS_MYSQL_DRIVER }}
           CMS_MYSQL_PASSWORD: ${{ secrets.CMS_MYSQL_PASSWORD }}
