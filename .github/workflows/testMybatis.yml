@@ -22,5 +22,5 @@ jobs:
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
         ./bin/migrate status --env=development2
-        ./bin/migrate down --env=development2
+        ./bin/migrate -script 20231220091623_create_users_table2.sql down --env=development2
         ./bin/migrate status --env=development2
