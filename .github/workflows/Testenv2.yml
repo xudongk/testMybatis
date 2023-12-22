@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: set path
+        run: |
+          pwd
+          cd mybatis-migrations-3.3.9/environments
+          ls
 
       - name: Commit config file
         if: hashFiles('development2.properties') != ''
@@ -30,6 +35,8 @@ jobs:
           CMS_MYSQL_URL: ${{ secrets.CMS_MYSQL_URL }}
           CMS_MYSQL_USERNAME: ${{ secrets.CMS_MYSQL_USERNAME }}
         run: |
+          ls
+          cd ../
           chmod +x mybatis-migrations-3.3.9/bin/migrate
           cd mybatis-migrations-3.3.9
           ./bin/migrate status --env=development2
