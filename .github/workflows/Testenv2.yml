@@ -37,7 +37,7 @@ jobs:
       - name: set path
         run: |
           pwd
-
+          ls
       - name: Commit config file
         if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
         env:
