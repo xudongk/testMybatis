@@ -21,6 +21,8 @@ jobs:
       run: |
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
-        ./bin/migrate status --env=development2
-        ./bin/migrate up --env=development2
-        ./bin/migrate status --env=development2
+        export MIGRATIONS_HOME=$(pwd)
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        migrate status --env=development2
+        migrate up --env=development2
+        migrate status --env=development2
