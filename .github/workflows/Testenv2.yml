@@ -1,6 +1,19 @@
 name: Test env2
 
 on:
+  workflow_call:
+    inputs:
+      json:
+        type: string
+    secrets:
+      CMS_MYSQL_DRIVER:
+        required: true
+      CMS_MYSQL_PASSWORD:
+        required: true
+      CMS_MYSQL_URL:
+        required: true
+      CMS_MYSQL_USERNAME:
+        required: true
   workflow_dispatch:
     inputs:
       json:
