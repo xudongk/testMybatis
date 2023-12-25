@@ -1,4 +1,4 @@
-name: Test env2
+name: migation
 
 on:
   workflow_call:
