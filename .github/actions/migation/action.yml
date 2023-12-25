@@ -29,8 +29,10 @@ runs:
         CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
       shell: bash
       run: |
+        ls
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
-        ./bin/migrate status --env=development2
-        ./bin/migrate up --env=development2
-        ./bin/migrate status --env=development2
+        mkdir workspace
+        cd workspace
+        ./bin/migrate --idpattern=001 init
+        ls
