@@ -1,1 +1,45 @@
-1
+name: Test env2
+
+on:
+  workflow_call:
+    inputs:
+      json:
+        type: string
+    secrets:
+      CMS_MYSQL_DRIVER:
+        required: true
+      CMS_MYSQL_PASSWORD:
+        required: true
+      CMS_MYSQL_URL:
+        required: true
+      CMS_MYSQL_USERNAME:
+        required: true
+  workflow_dispatch:
+    inputs:
+      json:
+        type: string
+    secrets:
+      CMS_MYSQL_DRIVER:
+        required: true
+      CMS_MYSQL_PASSWORD:
+        required: true
+      CMS_MYSQL_URL:
+        required: true
+      CMS_MYSQL_USERNAME:
+        required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Commit config file
+      if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
+      env:
+        CMS_MYSQL_DRIVER: ${{ secrets.CMS_MYSQL_DRIVER }}
+        CMS_MYSQL_PASSWORD: ${{ secrets.CMS_MYSQL_PASSWORD }}
+        CMS_MYSQL_URL: ${{ secrets.CMS_MYSQL_URL }}
+        CMS_MYSQL_USERNAME: ${{ secrets.CMS_MYSQL_USERNAME }}
+      run: |
+        chmod +x mybatis-migrations-3.3.9/bin/migrate
+        cd mybatis-migrations-3.3.9
+        ./bin/migrate status --env=development2
+        ./bin/migrate up --env=development2
+        ./bin/migrate status --env=development2
