@@ -32,7 +32,10 @@ runs:
         ls
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
+        export MIGRATIONS_HOME=$(pwd)
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        
         mkdir workspace
         cd workspace
-        ././bin/migrate --idpattern=001 init
+        migrate --idpattern=001 init
         ls
