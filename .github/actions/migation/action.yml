@@ -37,5 +37,5 @@ runs:
         
         mkdir workspace
         cd workspace
-        migrate --idpattern=001 init
+        migrate --idpattern=0000 init
         ls
