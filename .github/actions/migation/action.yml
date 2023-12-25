@@ -18,6 +18,7 @@ on:
         type: string
         required: true
 runs:
+  using: "composite"
   steps:
     - name: Commit config file
       if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
@@ -26,6 +27,7 @@ runs:
         CMS_MYSQL_PASSWORD: ${{ inputs.CMS_MYSQL_PASSWORD }}
         CMS_MYSQL_URL: ${{ inputs.CMS_MYSQL_URL }}
         CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
+      shell: bash
       run: |
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
