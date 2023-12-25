@@ -5,14 +5,17 @@ on:
     inputs:
       json:
         type: string
-    secrets:
       CMS_MYSQL_DRIVER:
+        type: string
         required: true
       CMS_MYSQL_PASSWORD:
+        type: string
         required: true
       CMS_MYSQL_URL:
+        type: string
         required: true
       CMS_MYSQL_USERNAME:
+        type: string
         required: true
   workflow_dispatch:
     inputs:
