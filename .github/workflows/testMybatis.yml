@@ -25,4 +25,4 @@ jobs:
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         migrate status --env=development
         migrate up --env=development
-        migrate status --env=developmen
+        migrate status --env=development
