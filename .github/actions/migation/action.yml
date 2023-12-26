@@ -57,3 +57,53 @@ runs:
       shell: bash
       run: |
         ls
+    - name: DB Deploy
+      run: |
+        migrate up
+      if: ${{ inputs.DeployType == 'DP' }}
+    - name: DB Fallback
+      run: |
+        #获取最小的id
+        cd scripts
+        for file in *; do
+            # 检查文件是否是普通文件
+            if [[ -f "$file" ]]; then
+                # 提取文件名中的数字部分
+                number=$(echo "$file" | grep -o "^[0-9]*")
+                # 检查是否为空
+                if [[ -n "$number" ]]; then
+                    # 比较数字并更新最小值
+                    if [[ -z "$minid" || "$number" -lt "$minid" ]]; then
+                        minid="$number"
+                    fi
+                fi
+            fi
+        done
+        cd ..
+        #定义state
+        #获取所有任务状态
+        status=$(migrate status)
+        lines=$(echo "$status" | sed -n '/^[0-9]\{14\}/p' | sed 's/^[[:space:]]*//')
+        #获取部署状态：
+        while IFS= read -r line; do
+            id=$(echo "$line" | awk '{print $1}')
+            appliedAt=$(echo "$line" | awk '{print $2" "$3}')
+            if [ "$minid" = "$id" ]; then
+                echo minid:$minid
+                if [[ $appliedAt == *pending* ]]; then
+                    state="pending"
+                    #不做操作
+                elif [[ $appliedAt == *fail* ]]; then
+                    state="fail"
+                    #down一次
+                    migrate down
+                else
+                    state="success"
+                    #version id并down
+                    migrate version $id
+                    migrate down
+                fi
+            fi
+        done <<< "$lines"
+        migrate status
+      if: ${{ failure() || inputs.DeployType == 'FB' }}
