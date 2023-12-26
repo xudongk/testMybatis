@@ -72,6 +72,7 @@ runs:
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         cd mybatis-migrations-3.3.9/workspace/
         ls
+        cat environments/development.properties
         migrate up
     - name: DB Deploy
       shell: bash
