@@ -42,3 +42,6 @@ runs:
         rm -rf 
         cp -r $path/drivers drivers
         ls
+        git add .
+        git commit -m "init pack"
+        git push
