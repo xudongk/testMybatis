@@ -87,6 +87,7 @@ runs:
         cd mybatis-migrations-3.3.9/workspace/
         #获取最小的id
         cd scripts
+        ls
         for file in *; do
             # 检查文件是否是普通文件
             if [[ -f "$file" ]]; then
@@ -102,6 +103,7 @@ runs:
             fi
         done
         cd ..
+        ls
         #定义state
         #获取所有任务状态
         status=$(migrate status)
