@@ -61,9 +61,9 @@ runs:
     - name: set Sql
       shell: bash
       run: |
-        rm -rf mybatis-migrations-3.3.9/scripts/*
-        cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
-        cd mybatis-migrations-3.3.9/scripts
+        rm -rf mybatis-migrations-3.3.9/workspace/scripts/*
+        cp -r sqlFile/sql/* mybatis-migrations-3.3.9/workspace/scripts/
+        cd mybatis-migrations-3.3.9/workspace/scripts
         ls
     - name: DB Deploy
       env:
