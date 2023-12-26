@@ -41,9 +41,9 @@ runs:
         mkdir workspace
         cd workspace
         migrate --idpattern=0000 init
-        cp -r $path/drivers/ drivers/
+        cp -r $path/drivers/* drivers/
         rm -rf environments/*
-        cp -r $path/environments/ environments/
+        cp -r $path/environments/* environments/
         git config --global user.email "xudongkej@163.com"
         git config --global user.name "xudongk"
         git add .
