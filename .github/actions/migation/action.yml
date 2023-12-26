@@ -62,7 +62,9 @@ runs:
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
-
+        export MIGRATIONS_HOME=$path
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        migrate up
     - name: DB Deploy
       shell: bash
       run: |
