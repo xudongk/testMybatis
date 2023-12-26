@@ -46,11 +46,6 @@ runs:
         cp -r $path/environments/* environments/
         rm -rf scripts/*
         
-        git config --global user.email "xudongkej@163.com"
-        git config --global user.name "xudongk"
-        git add .
-        git commit -m "init pack"
-        git push
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
