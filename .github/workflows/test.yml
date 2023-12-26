@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: step1
       run: |
-       echo 111
+       exit 1
     - name: step2
       run: |
         echo 222
