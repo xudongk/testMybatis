@@ -49,13 +49,13 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        path: sql
+        path: sqlFile
     - name: set Sql
       shell: bash
       run: |
         pwd
         ls
         rm -rf mybatis-migrations-3.3.9/scripts/*
-        cp -r sql/* mybatis-migrations-3.3.9/scripts/
+        cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
         cd mybatis-migrations-3.3.9/scripts/
         ls
