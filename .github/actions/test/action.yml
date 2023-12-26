@@ -36,7 +36,6 @@ runs:
         CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
       shell: bash
       run: |
-        pwd
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
         path=$(pwd)
@@ -57,9 +56,6 @@ runs:
     - name: set Sql
       shell: bash
       run: |
-        pwd
-        ls
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
         cd mybatis-migrations-3.3.9/scripts/
-        ls
