@@ -3,7 +3,10 @@ name: migation
 on:
   workflow_call:
     inputs:
-      json:
+      Env:
+        required: true
+        type: string
+      DeployType:
         type: string
       CMS_MYSQL_DRIVER:
         type: string
