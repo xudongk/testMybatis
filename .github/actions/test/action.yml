@@ -8,37 +8,43 @@ on:
         type: string
       DeployType:
         type: string
-      CMS_MYSQL_DRIVER:
+      DRIVER:
         type: string
         required: true
-      CMS_MYSQL_PASSWORD:
+      PASSWORD:
         type: string
         required: true
-      CMS_MYSQL_URL:
+      URL:
         type: string
         required: true
-      CMS_MYSQL_USERNAME:
+      USERNAME:
         type: string
         required: true
 runs:
   using: "composite"
   steps:
+    - name: test bash
+      shell: bash
+      run: |
+        echo "URLURL: ${{ inputs.URL }}"
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         repository: xudongk/testMybatis
-    - name: Commit config file
+    - id: setConfig
+      name: Commit config file
       if: hashFiles('mybatis-migrations-3.3.9/environments/development.properties') != ''
       env:
-        CMS_MYSQL_DRIVER: ${{ inputs.CMS_MYSQL_DRIVER }}
-        CMS_MYSQL_PASSWORD: ${{ inputs.CMS_MYSQL_PASSWORD }}
-        CMS_MYSQL_URL: ${{ inputs.CMS_MYSQL_URL }}
-        CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
+        DRIVER: ${{ inputs.DRIVER }}
+        PASSWORD: ${{ inputs.PASSWORD }}
+        URL: ${{ inputs.URL }}
+        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
         path=$(pwd)
+        echo "path=$path" >> $GITHUB_OUTPUT
         export MIGRATIONS_HOME=$path
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         
@@ -48,14 +54,24 @@ runs:
         cp -r $path/drivers/* drivers/
         rm -rf environments/*
         cp -r $path/environments/* environments/
-        
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         path: sqlFile
     - name: set Sql
+      env:
+        DRIVER: com.mysql.jdbc.Driver
+        PASSWORD: ${{ inputs.PASSWORD }}
+        URL: ${{ inputs.URL }}
+        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
-        cd mybatis-migrations-3.3.9/scripts/
+    - name: DB Deploy
+      shell: bash
+      run: |
+        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        cd mybatis-migrations-3.3.9/workspace/
+        migrate up
