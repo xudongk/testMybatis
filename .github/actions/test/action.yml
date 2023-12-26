@@ -45,7 +45,7 @@ runs:
         cp -r $path/drivers/* drivers/
         rm -rf environments/*
         cp -r $path/environments/* environments/
-        rm -rf scripts/*
+        
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
@@ -54,4 +54,8 @@ runs:
       shell: bash
       run: |
         pwd
+        ls
+        rm -rf mybatis-migrations-3.3.9/scripts/*
+        cp -r sql/* mybatis-migrations-3.3.9/scripts/
+        cd mybatis-migrations-3.3.9/scripts/
         ls
