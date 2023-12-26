@@ -60,7 +60,7 @@ runs:
         path: sqlFile
     - name: set Sql
       env:
-        DRIVER: com.mysql.jdbc.Driver
+        DRIVER: ${{ inputs.DRIVER }}
         PASSWORD: ${{ inputs.PASSWORD }}
         URL: ${{ inputs.URL }}
         USERNAME: ${{ inputs.USERNAME }}
