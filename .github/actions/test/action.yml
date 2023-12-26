@@ -46,7 +46,10 @@ runs:
         rm -rf environments/*
         cp -r $path/environments/* environments/
         rm -rf scripts/*
-        
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        path: sql
     - name: set Sql
       shell: bash
       run: |
