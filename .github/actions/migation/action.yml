@@ -112,7 +112,7 @@ runs:
         #定义state
         #获取所有任务状态
         status=$(migrate status)
-        lines=$(echo "$status" | sed -n '/^[0-9]\{14\}/p' | sed 's/^[[:space:]]*//')
+        lines=$(echo "$status" | grep -E '^\d+\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\s+')
         echo lines:$lines
         #获取部署状态：
         while IFS= read -r line; do
