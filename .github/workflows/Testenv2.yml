@@ -39,7 +39,7 @@ jobs:
           pwd
           ls
       - name: Commit config file
-        if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
+        if: hashFiles('mybatis-migrations-3.3.9/environments/development.properties') != ''
         env:
           CMS_MYSQL_DRIVER: ${{ secrets.CMS_MYSQL_DRIVER }}
           CMS_MYSQL_PASSWORD: ${{ secrets.CMS_MYSQL_PASSWORD }}

@@ -28,7 +28,7 @@ runs:
       with:
         repository: xudongk/testMybatis
     - name: Commit config file
-      if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
+      if: hashFiles('mybatis-migrations-3.3.9/environments/development.properties') != ''
       env:
         CMS_MYSQL_DRIVER: ${{ inputs.CMS_MYSQL_DRIVER }}
         CMS_MYSQL_PASSWORD: ${{ inputs.CMS_MYSQL_PASSWORD }}
