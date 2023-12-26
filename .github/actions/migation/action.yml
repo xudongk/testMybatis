@@ -118,6 +118,8 @@ runs:
         while IFS= read -r line; do
             id=$(echo "$line" | awk '{print $1}')
             appliedAt=$(echo "$line" | awk '{print $2" "$3}')
+            echo id:$id
+            echo appliedAt:$appliedAt
             if [ "$minid" = "$id" ]; then
                 echo minid:$minid
                 if [[ $appliedAt == *pending* ]]; then
