@@ -64,7 +64,7 @@ runs:
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
-        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.setConfig.path }}
+        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         migrate up
     - name: DB Deploy
