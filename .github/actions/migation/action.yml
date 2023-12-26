@@ -106,7 +106,7 @@ runs:
                 fi
             fi
         done
-        minid=${minid#0}
+        minid=$(echo $minid | awk '{printf "%d", $0}')
         echo "$minid"
         cd ..
         #定义state
