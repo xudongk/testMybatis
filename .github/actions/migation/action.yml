@@ -53,6 +53,8 @@ runs:
         git push
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        repository: xudongk/hc-demo
     - name: set Sql
       shell: bash
       run: |
