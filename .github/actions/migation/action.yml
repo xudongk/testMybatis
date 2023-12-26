@@ -80,6 +80,11 @@ runs:
         migrate up
       if: ${{ inputs.DeployType == 'DP' }}
     - name: DB Fallback
+      env:
+        DRIVER: ${{ inputs.DRIVER }}
+        PASSWORD: ${{ inputs.PASSWORD }}
+        URL: ${{ inputs.URL }}
+        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
@@ -87,7 +92,6 @@ runs:
         cd mybatis-migrations-3.3.9/workspace/
         #获取最小的id
         cd scripts
-        ls
         for file in *; do
             # 检查文件是否是普通文件
             if [[ -f "$file" ]]; then
@@ -103,10 +107,10 @@ runs:
             fi
         done
         cd ..
-        ls
         #定义state
         #获取所有任务状态
         status=$(migrate status)
+        echo "$status"
         lines=$(echo "$status" | sed -n '/^[0-9]\{14\}/p' | sed 's/^[[:space:]]*//')
         #获取部署状态：
         while IFS= read -r line; do
