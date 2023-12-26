@@ -60,10 +60,12 @@ runs:
       run: |
         ls
     - name: DB Deploy
+      shell: bash
       run: |
         migrate up
       if: ${{ inputs.DeployType == 'DP' }}
     - name: DB Fallback
+      shell: bash
       run: |
         #获取最小的id
         cd scripts
