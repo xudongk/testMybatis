@@ -63,6 +63,8 @@ runs:
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
+        cd mybatis-migrations-3.3.9/scripts
+        ls
     - name: DB Deploy
       env:
         DRIVER: ${{ inputs.DRIVER }}
