@@ -42,8 +42,8 @@ runs:
         cd workspace
         migrate --idpattern=0000 init
         cp -r $path/drivers drivers
-        rm -rf 
-        cp -r $path/drivers drivers
+        rm -rf environments/*
+        cp -r $path/environments environments
         ls
         git config --global user.email "xudongkej@163.com"
         git config --global user.name "xudongk"
