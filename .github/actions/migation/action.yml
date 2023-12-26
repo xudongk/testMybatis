@@ -23,6 +23,10 @@ on:
 runs:
   using: "composite"
   steps:
+    - name: test bash
+      shell: bash
+      run: |
+        echo "URLURL: ${{ inputs.URL }}"
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
