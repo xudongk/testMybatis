@@ -61,6 +61,11 @@ runs:
       with:
         path: sqlFile
     - name: set Sql
+      env:
+        DRIVER: ${{ inputs.DRIVER }}
+        PASSWORD: ${{ inputs.PASSWORD }}
+        URL: ${{ inputs.URL }}
+        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
