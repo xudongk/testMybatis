@@ -112,14 +112,12 @@ runs:
         #定义state
         #获取所有任务状态
         status=$(migrate status)
-        echo "$status"
         lines=$(echo "$status" | sed -n '/^[0-9]\{14\}/p' | sed 's/^[[:space:]]*//')
+        echo lines:$lines
         #获取部署状态：
         while IFS= read -r line; do
             id=$(echo "$line" | awk '{print $1}')
             appliedAt=$(echo "$line" | awk '{print $2" "$3}')
-            echo id:$id
-            echo appliedAt:$appliedAt
             if [ "$minid" = "$id" ]; then
                 echo minid:$minid
                 if [[ $appliedAt == *pending* ]]; then
