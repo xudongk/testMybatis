@@ -29,13 +29,16 @@ runs:
         CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
       shell: bash
       run: |
-        ls
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
-        export MIGRATIONS_HOME=$(pwd)
+        path=$(pwd)
+        export MIGRATIONS_HOME=$path
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         
         mkdir workspace
         cd workspace
         migrate --idpattern=0000 init
+        cp -r $path/drivers drivers
+        rm -rf 
+        cp -r $path/drivers drivers
         ls
