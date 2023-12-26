@@ -23,6 +23,10 @@ on:
 runs:
   using: "composite"
   steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        repository: xudongk/testMybatis
     - name: Commit config file
       if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
       env:
