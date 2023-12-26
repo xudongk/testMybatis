@@ -31,7 +31,8 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: xudongk/testMybatis
-    - name: Commit config file
+    - id: setConfig
+      name: Commit config file
       if: hashFiles('mybatis-migrations-3.3.9/environments/development.properties') != ''
       env:
         DRIVER: ${{ inputs.DRIVER }}
@@ -43,6 +44,7 @@ runs:
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
         path=$(pwd)
+        echo "path=$path" >> $GITHUB_OUTPUT
         export MIGRATIONS_HOME=$path
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         
@@ -62,7 +64,7 @@ runs:
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
-        export MIGRATIONS_HOME=$path
+        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.setConfig }}
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         migrate up
     - name: DB Deploy
