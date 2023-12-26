@@ -106,6 +106,7 @@ runs:
                 fi
             fi
         done
+        echo "$minid"
         cd ..
         #定义state
         #获取所有任务状态
