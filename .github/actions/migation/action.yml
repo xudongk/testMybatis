@@ -106,7 +106,7 @@ runs:
                 fi
             fi
         done
-        $minid=$(expr $$minid + 0)
+        minid=$(expr $$minid + 0)
         echo "$minid"
         cd ..
         #定义state
