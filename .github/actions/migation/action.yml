@@ -42,6 +42,9 @@ runs:
         rm -rf 
         cp -r $path/drivers drivers
         ls
+        git config --global user.email "xudongkej@163.com"
+        git config --global user.name "xudongk"
         git add .
         git commit -m "init pack"
         git push
+        
