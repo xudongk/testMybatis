@@ -23,6 +23,10 @@ on:
 runs:
   using: "composite"
   steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        repository: xudongk/testMybatis
     - name: Commit config file
       if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
       env:
@@ -32,7 +36,6 @@ runs:
         CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
       shell: bash
       run: |
-        pwd
         chmod +x mybatis-migrations-3.3.9/bin/migrate
         cd mybatis-migrations-3.3.9
         path=$(pwd)
@@ -45,15 +48,18 @@ runs:
         cp -r $path/drivers/* drivers/
         rm -rf environments/*
         cp -r $path/environments/* environments/
-        rm -rf scripts/*
         
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        path: sqlFile
     - name: set Sql
       shell: bash
       run: |
-        pwd
-        ls
+        rm -rf mybatis-migrations-3.3.9/scripts/*
+        cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
+        cd mybatis-migrations-3.3.9/scripts/
+
     - name: DB Deploy
       shell: bash
       run: |
