@@ -1,0 +1,54 @@
+name: migation
+
+on:
+  workflow_call:
+    inputs:
+      Env:
+        required: true
+        type: string
+      DeployType:
+        type: string
+      CMS_MYSQL_DRIVER:
+        type: string
+        required: true
+      CMS_MYSQL_PASSWORD:
+        type: string
+        required: true
+      CMS_MYSQL_URL:
+        type: string
+        required: true
+      CMS_MYSQL_USERNAME:
+        type: string
+        required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Commit config file
+      if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
+      env:
+        CMS_MYSQL_DRIVER: ${{ inputs.CMS_MYSQL_DRIVER }}
+        CMS_MYSQL_PASSWORD: ${{ inputs.CMS_MYSQL_PASSWORD }}
+        CMS_MYSQL_URL: ${{ inputs.CMS_MYSQL_URL }}
+        CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
+      shell: bash
+      run: |
+        pwd
+        chmod +x mybatis-migrations-3.3.9/bin/migrate
+        cd mybatis-migrations-3.3.9
+        path=$(pwd)
+        export MIGRATIONS_HOME=$path
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        
+        mkdir workspace
+        cd workspace
+        migrate --idpattern=0000 init
+        cp -r $path/drivers/* drivers/
+        rm -rf environments/*
+        cp -r $path/environments/* environments/
+        rm -rf scripts/*
+        
+    - name: set Sql
+      shell: bash
+      run: |
+        pwd
+        ls
