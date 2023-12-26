@@ -8,16 +8,16 @@ on:
         type: string
       DeployType:
         type: string
-      CMS_MYSQL_DRIVER:
+      DRIVER:
         type: string
         required: true
-      CMS_MYSQL_PASSWORD:
+      PASSWORD:
         type: string
         required: true
-      CMS_MYSQL_URL:
+      URL:
         type: string
         required: true
-      CMS_MYSQL_USERNAME:
+      USERNAME:
         type: string
         required: true
 runs:
@@ -30,10 +30,10 @@ runs:
     - name: Commit config file
       if: hashFiles('mybatis-migrations-3.3.9/environments/development2.properties') != ''
       env:
-        CMS_MYSQL_DRIVER: ${{ inputs.CMS_MYSQL_DRIVER }}
-        CMS_MYSQL_PASSWORD: ${{ inputs.CMS_MYSQL_PASSWORD }}
-        CMS_MYSQL_URL: ${{ inputs.CMS_MYSQL_URL }}
-        CMS_MYSQL_USERNAME: ${{ inputs.CMS_MYSQL_USERNAME }}
+        DRIVER: ${{ inputs.DRIVER }}
+        PASSWORD: ${{ inputs.PASSWORD }}
+        URL: ${{ inputs.URL }}
+        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         chmod +x mybatis-migrations-3.3.9/bin/migrate
