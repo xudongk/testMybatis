@@ -59,16 +59,16 @@ runs:
       with:
         path: sqlFile
     - name: set Sql
-      env:
-        DRIVER: ${{ inputs.DRIVER }}
-        PASSWORD: ${{ inputs.PASSWORD }}
-        URL: ${{ inputs.URL }}
-        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
     - name: DB Deploy
+      env:
+        DRIVER: ${{ inputs.DRIVER }}
+        PASSWORD: ${{ inputs.PASSWORD }}
+        URL: ${{ inputs.URL }}
+        USERNAME: ${{ inputs.USERNAME }}
       shell: bash
       run: |
         export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
