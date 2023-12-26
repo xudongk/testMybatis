@@ -68,20 +68,20 @@ runs:
       run: |
         rm -rf mybatis-migrations-3.3.9/scripts/*
         cp -r sqlFile/sql/* mybatis-migrations-3.3.9/scripts/
-        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
-        export PATH="$MIGRATIONS_HOME/bin:$PATH"
-        cd mybatis-migrations-3.3.9/workspace/
-        ls
-        cat environments/development.properties
-        migrate up
     - name: DB Deploy
       shell: bash
       run: |
+        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        cd mybatis-migrations-3.3.9/workspace/
         migrate up
       if: ${{ inputs.DeployType == 'DP' }}
     - name: DB Fallback
       shell: bash
       run: |
+        export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
+        export PATH="$MIGRATIONS_HOME/bin:$PATH"
+        cd mybatis-migrations-3.3.9/workspace/
         #获取最小的id
         cd scripts
         for file in *; do
