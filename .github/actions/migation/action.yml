@@ -120,10 +120,6 @@ runs:
                 if [[ $appliedAt == *pending* ]]; then
                     state="pending"
                     #不做操作
-                elif [[ $appliedAt == *fail* ]]; then
-                    state="fail"
-                    #down一次
-                    migrate down
                 else
                     state="success"
                     #version id并down
