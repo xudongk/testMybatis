@@ -29,7 +29,6 @@ runs:
         repository: xudongk/testMybatis
     - id: setConfig
       name: Commit config file
-      if: hashFiles('mybatis-migrations-3.3.9/environments/development.properties') != ''
       env:
         DRIVER: ${{ inputs.DRIVER }}
         PASSWORD: ${{ inputs.PASSWORD }}
