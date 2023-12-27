@@ -66,6 +66,7 @@ runs:
         cd mybatis-migrations-3.3.9/workspace/scripts
         ls
     - name: DB Deploy
+      if: ${{ inputs.DeployType == 'DP' }}
       env:
         DRIVER: ${{ inputs.DRIVER }}
         PASSWORD: ${{ inputs.PASSWORD }}
@@ -78,8 +79,9 @@ runs:
         cd mybatis-migrations-3.3.9/workspace/
         migrate status
         migrate up
-      if: ${{ inputs.DeployType == 'DP' }}
+      
     - name: DB Fallback
+      if: ${{ failure() || inputs.DeployType == 'FB' }}
       env:
         DRIVER: ${{ inputs.DRIVER }}
         PASSWORD: ${{ inputs.PASSWORD }}
@@ -136,4 +138,3 @@ runs:
             fi
         done <<< "$lines"
         migrate status
-      if: ${{ failure() || inputs.DeployType == 'FB' }}
