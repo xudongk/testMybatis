@@ -89,20 +89,33 @@ runs:
         cd mybatis-migrations-3.3.9/workspace/
         #获取最小的id
         cd scripts
-        for file in *; do
-            # 检查文件是否是普通文件
-            if [[ -f "$file" ]]; then
-                # 提取文件名中的数字部分
-                number=$(echo "$file" | grep -o "^[0-9]*")
-                # 检查是否为空
-                if [[ -n "$number" ]]; then
-                    # 比较数字并更新最小值
-                    if [[ -z "$minid" || "$number" -lt "$minid" ]]; then
-                        minid="$number"
-                    fi
-                fi
-            fi
-        done
+        # for file in *; do
+        #     # 检查文件是否是普通文件
+        #     if [[ -f "$file" ]]; then
+        #         # 提取文件名中的数字部分
+        #         number=$(echo "$file" | grep -o "^[0-9]*")
+        #         # 检查是否为空
+        #         if [[ -n "$number" ]]; then
+        #             # 比较数字并更新最小值
+        #             if [[ -z "$minid" || "$number" -lt "$minid" ]]; then
+        #                 minid="$number"
+        #             fi
+        #         fi
+        #     fi
+        # done
+        #读取ready_sql，获取待升级/回滚的sql
+        file_content=$(cat ready_sql)
+        IFS=',' read -ra sql_list <<< "$file_content"
+        for number in "${sql_list[@]}"; do
+          # 检查是否为空
+          if [[ -n "$number" ]]; then
+              # 比较数字并更新最小值
+              if [[ -z "$minid" || "$number" -lt "$minid" ]]; then
+                  minid="$number"
+              fi
+          fi
+        done  
+        
         minid=$(echo $minid | awk '{printf "%d", $0}')
         echo "$minid"
         cd ..
