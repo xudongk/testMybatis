@@ -16,11 +16,11 @@ jobs:
       with:
         node-version: 14
     - name: Set up MySQL
-      uses: mysql-actions/mysql@v1
+      uses: mysql-actions/setup-mysql@v1
       with:
         mysql-version: '8.0'
-        server-port: 3306
-        root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        mysql-port: 3306
+        mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
     - name: Run SQL script
       run: |
         mysql -h ${{ secrets.DB_HOST }} -P ${{ secrets.DB_PORT }} -u ${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < sql_scripts/my_script.sql
