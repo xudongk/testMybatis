@@ -8,21 +8,19 @@ on:
 jobs:
   download_code:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Set up JDK
-      uses: actions/setup-java@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        java-version: 11.0.1
-        distribution: 'adopt'
-    - name: Run database migrations
+        node-version: 14
+    - name: Set up MySQL
+      uses: mysql-actions/mysql@v1
+      with:
+        mysql-version: '8.0'
+        server-port: 3306
+        root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+    - name: Run SQL script
       run: |
-        chmod +x mybatis-migrations-3.3.9/bin/migrate
-        cd mybatis-migrations-3.3.9
-        export MIGRATIONS_HOME=$(pwd)
-        export PATH="$MIGRATIONS_HOME/bin:$PATH"
-        migrate status --env=development
-        migrate up --env=development
-        migrate status --env=development
+        mysql -h ${{ secrets.DB_HOST }} -P ${{ secrets.DB_PORT }} -u ${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < sql_scripts/my_script.sql
