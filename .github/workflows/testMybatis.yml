@@ -16,13 +16,12 @@ jobs:
       with:
         node-version: 14
     - name: Set up MySQL
-      run: |
-        # 安装 mysql-client
-        sudo apt-get update
-        sudo apt-get install mysql-client -y
-    
-        # 运行 SQL 脚本或执行 MySQL 命令
-        mysql -h <host> -u <username> -p<password> -e "YOUR_SQL_STATEMENT"
+      uses: actions/mysql-action@v1
+      with:
+        mysql-host: <host>
+        mysql-port: <port>
+        mysql-user: <username>
+        mysql-password: ${{ secrets.MYSQL_PASSWORD }}
     - name: Run SQL script
       run: |
         mysql -h ${{ secrets.DB_HOST }} -P ${{ secrets.DB_PORT }} -u ${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < sql_scripts/my_script.sql
