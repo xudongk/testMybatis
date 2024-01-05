@@ -15,13 +15,11 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 14
-    - name: Set up MySQL
-      uses: actions/mysql-action@v1
-      with:
-        mysql-host: <host>
-        mysql-port: <port>
-        mysql-user: <username>
-        mysql-password: ${{ secrets.MYSQL_PASSWORD }}
     - name: Run SQL script
       run: |
-        mysql -h ${{ secrets.DB_HOST }} -P ${{ secrets.DB_PORT }} -u ${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < sql_scripts/my_script.sql
+        # 安装 mysql-client
+        sudo apt-get update
+        sudo apt-get install mysql-client -y
+    
+        # 运行 SQL 脚本或执行 MySQL 命令
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e INSERT INTO test2 (id, name, age, email) VALUES(3, '1', 0, '2');
