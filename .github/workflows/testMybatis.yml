@@ -21,6 +21,14 @@ jobs:
         # 安装 mysql-client
         sudo apt-get update
         sudo apt-get install mysql-client -y
-    
+        cd sql
+        echo "START TRANSACTION;" > new_test.sql
+        cat test.sql >> new_test.sql
+        echo "DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+          ROLLBACK;
+          RESIGNAL;
+        END;
+        COMMIT;" >> new_test.sql
         # 运行 SQL 脚本或执行 MySQL 命令
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < sql/test.sql
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql
