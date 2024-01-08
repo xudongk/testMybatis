@@ -18,9 +18,9 @@ jobs:
     - name: Run SQL script
       run: |
         ls
-        # # 安装 mysql-client
-        # sudo apt-get update
-        # sudo apt-get install mysql-client -y
+        # 安装 mysql-client
+        sudo apt-get update
+        sudo apt-get install mysql-client -y
     
-        # # 运行 SQL 脚本或执行 MySQL 命令
-        # mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < sql/test.sql
+        # 运行 SQL 脚本或执行 MySQL 命令
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < sql/test.sql
