@@ -10,6 +10,5 @@ BEGIN
   ROLLBACK;
   RESIGNAL;
 END;
-
 -- 提交事务
 COMMIT;
