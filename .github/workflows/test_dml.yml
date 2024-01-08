@@ -22,13 +22,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install mysql-client -y
         cd sql
-        echo "SET autocommit=0;
-        DECLARE EXIT HANDLER FOR SQLEXCEPTION
-        BEGIN
-          ROLLBACK;
-          RESIGNAL;
-        END;
-        START TRANSACTION;" > new_test.sql
+        echo "START TRANSACTION;" > new_test.sql
         cat test.sql >> new_test.sql
         echo "COMMIT;" >> new_test.sql
         cat new_test.sql
