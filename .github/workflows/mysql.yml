@@ -23,5 +23,5 @@ jobs:
         cat test.sql >> new_test.sql
         echo "COMMIT;" >> new_test.sql
         cat new_test.sql
-        # 运行 SQL 脚本或执行 MySQL 命令
+        # 运行 SQL 脚本或执行 MySQL 命令a
         mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql
