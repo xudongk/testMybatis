@@ -18,10 +18,10 @@ jobs:
       uses: mysql/setup-mysql@v2
       with:
         mysql-version: '8.0'
-        mysql-host: 175.27.254.42
-        mysql-port: 3306
-        mysql-user: root
-        mysql-password: 'Ppe7LDR6FBWpL4Me'
+        mysql-host: ${{ secrets.MYSQL_HOST }}
+        mysql-port: ${{ secrets.MYSQL_PORT }}
+        mysql-user: ${{ secrets.MYSQL_USER }}
+        mysql-password: ${{ secrets.MYSQL_PASSWORD }}
     - name: Run MySQL script
       run: 
         ls
