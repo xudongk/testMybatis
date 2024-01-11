@@ -3,7 +3,7 @@ name: test workflow
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   download_code:
