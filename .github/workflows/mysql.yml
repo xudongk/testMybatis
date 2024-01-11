@@ -13,7 +13,7 @@ jobs:
         mysql-host: 175.27.254.42
         mysql-port: 3306
         mysql-user: root
-        mysql-password: Ppe7LDR6FBWpL4Me
+        mysql-password: 'Ppe7LDR6FBWpL4Me'
     - name: Run MySQL script
       run: 
         ls
