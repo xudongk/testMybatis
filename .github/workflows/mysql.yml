@@ -1,0 +1,22 @@
+name: Run MySQL script
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up MySQL
+      uses: mysql/setup-mysql@v2
+      with:
+        mysql-version: '8.0'
+        mysql-host: ${{ secrets.MYSQL_HOST }}
+        mysql-port: ${{ secrets.MYSQL_PORT }}
+        mysql-user: ${{ secrets.MYSQL_USER }}
+        mysql-password: ${{ secrets.MYSQL_PASSWORD }}
+
+    - name: Run MySQL script
+      run: mysql -h ${{ secrets.MYSQL_HOST }} -P ${{ secrets.MYSQL_PORT }} -u ${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD }} < path/to/script.sql
