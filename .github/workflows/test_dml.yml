@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  download_code:
+  exeSql:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
