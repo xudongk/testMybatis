@@ -19,7 +19,7 @@ jobs:
         cd sql
         echo "BEGIN;" > new_test.sql
         echo "SET client_encoding = 'UTF8';" >> new_test.sql
-        echo testPg.sql >> new_test.sql
+        cat testPg.sql >> new_test.sql
         echo "COMMIT;" >> new_test.sql
         cat new_test.sql
         
