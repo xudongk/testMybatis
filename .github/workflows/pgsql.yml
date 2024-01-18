@@ -12,12 +12,13 @@ jobs:
     - name: Run SQL script
       run: |
         ls
-        # 安装 mysql-client
+        # 安装 pgsql-client
         sudo apt-get update
         sudo apt-get install -y postgresql-client
         psql --version
         cd sql
-        echo "BEGIN;\nSET client_encoding = 'UTF8';" > new_test.sql
+        echo "BEGIN;" > new_test.sql
+        cat "SET client_encoding = 'UTF8';" >> new_test.sql
         cat testPg.sql >> new_test.sql
         echo "COMMIT;" >> new_test.sql
         cat new_test.sql
@@ -27,7 +28,8 @@ jobs:
         cat output.txt
         
         if grep -q "ROLLBACK" output.txt; then
-            echo "文件中包含要搜索的字符串"
+            echo "文件中包含ROLLBACK"
+            exit 1
         else
-            echo "文件中不包含要搜索的字符串"
+            echo "文件中不包含ROLLBACK"
         fi
