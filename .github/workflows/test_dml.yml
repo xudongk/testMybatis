@@ -18,6 +18,7 @@ jobs:
         cd sql
         echo "START TRANSACTION;" > new_test.sql
         cat test.sql >> new_test.sql
+        ls *.sql | sort -t_ -k1,1n | xargs cat > new_test.sql
         echo "COMMIT;" >> new_test.sql
         cat new_test.sql
         
