@@ -21,7 +21,7 @@ jobs:
         psql --version
         cd pgsql
 
-        echo "BEGIN;" | echo "SET client_encoding = '${{ secrets.SQL_CHARSET }}';" | cat - $(ls *.sql | sort -t_ -k1,1n) > newfile.sql
+        echo -e "START TRANSACTION;\nSET client_encoding = '${{ secrets.SQL_CHARSET }}';" | cat - $(ls *.sql | sort -t_ -k1,1n) > new_test.sql
 
         # echo "BEGIN;" > new_test.sql
         # echo "SET client_encoding = '${{ secrets.SQL_CHARSET }}';" >> new_test.sql
