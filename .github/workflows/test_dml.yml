@@ -18,7 +18,8 @@ jobs:
         cd sql
         database_name="fc"
         for file in $(ls -r *.sql | sort -t_ -k1,1nr); do
-          mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me  -D fc -e "CALL execute_sql_file('$file','$database_name');" || exit 1
+          mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me  -D fc -e "CALL execute_sql_file('$file','$database_name');" >output.txt || exit 1
+          cat output.txt
         done
         # # echo "START TRANSACTION;" > new_test.sql
         # # ls *.sql | sort -t_ -k1,1n | xargs cat > new_test.sql
