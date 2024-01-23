@@ -15,7 +15,14 @@ jobs:
         # 安装 mysql-client
         sudo apt-get update
         sudo apt-get install mysql-client -y
-        cd sql
+        echo "START TRANSACTION;" > new_test.sql
+        for file in $(ls -r sql/*.sql | sort -t_ -k1,1n); do
+        	echo "SOURCE $file;" >> new_test.sql
+        done
+        echo "COMMIT;" >> new_test.sql
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql
+
+        # cd sql
         # MYSQL_HOST="175.27.254.42"   # MySQL服务器地址
         # MYSQL_USER="root"        # MySQL登录用户名
         # MYSQL_PASSWORD="Ppe7LDR6FBWpL4Me"       # MySQL登录密码（如果有）
@@ -33,21 +40,21 @@ jobs:
         #            'COMMIT;';
         # -- 执行动态SQL
         # EXEC sp_executesql @sql;
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "START TRANSACTION;"
-        sql_files=$(ls -r *.sql | sort -t_ -k1,1nr)
-        遍历并执行每个 SQL 文件
-        for file in $sql_files; do
-            echo "执行文件: $file"
-            mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < "$file"
-            # 检查 SQL 文件的执行结果
-            if [ $? -ne 0 ]; then
-                echo "文件执行失败: $file"
-                # 执行失败，回滚事务
-                mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "ROLLBACK;"
-                exit 1
-            fi
-        done
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "COMMIT;"
+        # mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "START TRANSACTION;"
+        # sql_files=$(ls -r *.sql | sort -t_ -k1,1nr)
+        # 遍历并执行每个 SQL 文件
+        # for file in $sql_files; do
+        #     echo "执行文件: $file"
+        #     mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < "$file"
+        #     # 检查 SQL 文件的执行结果
+        #     if [ $? -ne 0 ]; then
+        #         echo "文件执行失败: $file"
+        #         # 执行失败，回滚事务
+        #         mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "ROLLBACK;"
+        #         exit 1
+        #     fi
+        # done
+        # mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "COMMIT;"
         
         # for file in $(ls -r *.sql | sort -t_ -k1,1nr); do
         #   mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me  -D fc -e "CALL execute_sql_file('$file','$database_name');" > output.txt
