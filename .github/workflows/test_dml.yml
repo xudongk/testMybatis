@@ -23,7 +23,6 @@ jobs:
         # 连接到MySQL服务器
         mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $DATABASE << EOF
         # SQL文件列表
-        sql_files=$(ls -r *.sql | sort -t_ -k1,1nr)
         DECLARE @sql NVARCHAR(MAX) = '';
         USE $DATABASE;
         -- 构建动态SQL
