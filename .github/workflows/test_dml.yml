@@ -16,6 +16,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install mysql-client -y
         cd sql
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -e "USE fc;"
         for file in $(ls -r *.sql | sort -t_ -k1,1nr); do
           mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "CALL execute_sql_file('$file');" || exit 1
         done
