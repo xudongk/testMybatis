@@ -16,12 +16,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install mysql-client -y
         cd sql
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "SET autocommit = 0;"
         for file in $(ls -r *.sql | sort -t_ -k1,1nr); do
-          mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < $file || exit 1
+          mysql -u username -p password -h hostname -P port -e "CALL execute_sql_file('$file', fc);" || exit 1
         done
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "COMMIT;"
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc -e "SET autocommit = 1;"
         # # echo "START TRANSACTION;" > new_test.sql
         # # ls *.sql | sort -t_ -k1,1n | xargs cat > new_test.sql
         # echo "START TRANSACTION;" | cat - $(ls *.sql | sort -t_ -k1,1n) > new_test.sql
