@@ -20,7 +20,8 @@ jobs:
         sudo apt-get install -y postgresql-client
         psql --version
         echo "BEGIN;" > new_test.sql
-        for file in $(ls -r sql/*.sql | sort -t_ -k1,1n); do
+        echo "SET client_encoding = '${{ secrets.SQL_CHARSET }}';" >> new_test.sql
+        for file in $(ls -r pgsql/*.sql | sort -t_ -k1,1n); do
         	echo "\i $file;" >> new_test.sql
         done
         echo "COMMIT;" >> new_test.sql
