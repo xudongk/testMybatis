@@ -19,14 +19,20 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y postgresql-client
         psql --version
-        cd pgsql
+        echo "BEGIN;" > new_test.sql
+        echo "\i pgsql/test.sql;" >> new_test.sql
+        echo "COMMIT;" > new_test.sql
 
-        echo -e "BEGIN;\nSET client_encoding = '${{ secrets.SQL_CHARSET }}';" | cat - $(ls *.sql | sort -t_ -k1,1n) > new_test.sql
+
+        # cd pgsql
+        # echo -e "BEGIN;\nSET client_encoding = '${{ secrets.SQL_CHARSET }}';" | cat - $(ls *.sql | sort -t_ -k1,1n) > new_test.sql
+        # echo "COMMIT;" >> new_test.sql
 
         # echo "BEGIN;" > new_test.sql
         # echo "SET client_encoding = '${{ secrets.SQL_CHARSET }}';" >> new_test.sql
         # cat testPg.sql >> new_test.sql
-        echo "COMMIT;" >> new_test.sql
+        # echo "COMMIT;" >> new_test.sql
+
         cat new_test.sql
         
         # 运行 SQL 脚本或执行 MySQL 命令
