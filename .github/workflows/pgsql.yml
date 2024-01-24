@@ -21,7 +21,7 @@ jobs:
         psql --version
         echo "BEGIN;" > new_test.sql
         echo "\i pgsql/test.sql;" >> new_test.sql
-        echo "COMMIT;" > new_test.sql
+        echo "COMMIT;" >> new_test.sql
 
 
         # cd pgsql
