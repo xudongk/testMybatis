@@ -1,2 +1,2 @@
 INSERT INTO public.test (id, "name") VALUES(2, '1');
-INSERT INTO public.test (id, "name") VALUES(3, '1');
+INSERT INTO public.test (id, "name") VALUES(2, '1');
