@@ -2,6 +2,11 @@ name: dml sql
 
 on:
   workflow_dispatch:
+    inputs:
+      a:
+        description: 'Value of DBType'
+        required: true
+        options: ['MYSQL', 'PGSQL']
 
 jobs:
   exeSql:
