@@ -9,7 +9,21 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Run SQL script
+    - name: Run mysql script
+      if: ${{ inputs.DBType == 'MYSQL' }}
+      run: |
+        ls
+        # 安装 mysql-client
+        sudo apt-get update
+        sudo apt-get install mysql-client -y
+        echo "START TRANSACTION;" > new_test.sql
+        for file in $(ls -r sql/*.sql | sort -t_ -k1,1n); do
+        	echo "SOURCE $file;" >> new_test.sql
+        done
+        echo "COMMIT;" >> new_test.sql
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql
+    - name: Run pgsql script
+      if: ${{ inputs.DBType == 'PGSQL' }}
       run: |
         ls
         # 安装 mysql-client
