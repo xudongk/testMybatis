@@ -39,7 +39,7 @@ jobs:
         cat new_test.sql
         
         # 运行 SQL 脚本或执行 MySQL 命令
-        PGPASSWORD=password psql -h 117.88.100.240 -p 15433 -d postgres -U postgres -f new_test.sql > output.txt
+        PGPASSWORD=12345678 psql -h 117.88.100.240 -p 15433 -d postgres -U postgres -f new_test.sql > output.txt
         cat output.txt
         
         if grep -q "ROLLBACK" output.txt; then
