@@ -3,8 +3,7 @@ name: dml sql
 on:
   workflow_dispatch:
     inputs:
-      a:
-        description: 'Value of DBType'
+      DBType:
         required: true
         options: ['MYSQL', 'PGSQL']
 
