@@ -26,12 +26,25 @@ jobs:
       if: ${{ inputs.DBType == 'PGSQL' }}
       run: |
         ls
-        # 安装 mysql-client
+        # 安装 pgsql-client
         sudo apt-get update
-        sudo apt-get install mysql-client -y
-        echo "START TRANSACTION;" > new_test.sql
-        for file in $(ls -r sql/*.sql | sort -t_ -k1,1n); do
-        	echo "SOURCE $file;" >> new_test.sql
+        sudo apt-get install -y postgresql-client
+        psql --version
+        echo "BEGIN;" > new_test.sql
+        echo "SET client_encoding = '${{ secrets.SQL_CHARSET }}';" >> new_test.sql
+        for file in $(ls -r pgsql/*.sql | sort -t_ -k1,1n); do
+        	echo "\i $file;" >> new_test.sql
         done
         echo "COMMIT;" >> new_test.sql
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql
+
+        cat new_test.sql
+        
+        # 运行 SQL 脚本或执行 MySQL 命令
+        PGPASSWORD=password psql -h 117.88.100.240 -p 15433 -d postgres -U postgres -f new_test.sql > output.txt
+        cat output.txt
+        if grep -q "ROLLBACK" output.txt; then
+            echo "文件中包含ROLLBACK"
+            echo output.txt | exit 1
+        else
+            echo "文件中不包含ROLLBACK"
+        fi
