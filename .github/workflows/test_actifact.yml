@@ -25,8 +25,8 @@ jobs:
     - name: check file
       run: |
         ls
-    - name: delete file
-      uses: actions/delete-artifact@v2
-      with:
-        name: artifact
+    # - name: delete file
+    #   uses: actions/delete-artifact@v2
+    #   with:
+    #     name: artifact
     
