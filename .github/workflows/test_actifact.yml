@@ -1,0 +1,28 @@
+name: dml sql
+
+on:
+  workflow_dispatch:
+    inputs:
+      DBType:
+        type: choice
+        required: true
+        options: ['MYSQL', 'PGSQL']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: upload file
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifact
+        path: ./*
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: check file
+      run: |
+        ls
+    
