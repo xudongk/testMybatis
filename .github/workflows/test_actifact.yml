@@ -18,10 +18,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: down file
-      uses: actions/download-artifact@v2
-      with:
-        name: artifact
+    # - name: down file
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: artifact
     - name: check file
       run: |
         ls
