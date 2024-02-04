@@ -15,9 +15,18 @@ jobs:
         name: artifact
         path: ./*
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: down file
+      uses: actions/download-artifact@v2
+      with:
+        name: artifact
     - name: check file
       run: |
         ls
+    - name: delete file
+      uses: actions/delete-artifact@v2
+      with:
+        name: artifact
     
