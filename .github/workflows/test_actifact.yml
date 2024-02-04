@@ -2,11 +2,6 @@ name: dml sql
 
 on:
   workflow_dispatch:
-    inputs:
-      DBType:
-        type: choice
-        required: true
-        options: ['MYSQL', 'PGSQL']
 
 jobs:
   build:
