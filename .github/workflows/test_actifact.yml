@@ -16,7 +16,7 @@ jobs:
           https://api.github.com/repos/xudongk/testMybatis/actions/artifacts)
         sudo apt-get update
         sudo apt-get install jq
-        artifact_id=$(echo "$json" | jq '.artifacts[] | select(.name == "artifact") | .id')
+        artifact_id=$(echo "$json" | jq '.artifacts[] | select(.name == "${{ github.workflow }}") | .id')
         curl -L \
           -X DELETE \
           -H "Accept: application/vnd.github+json" \
@@ -28,7 +28,7 @@ jobs:
     - name: upload file
       uses: actions/upload-artifact@v2
       with:
-        name: artifact
+        name: ${{ github.workflow }}
         path: ./*
   test:
     needs: build
@@ -37,7 +37,7 @@ jobs:
     - name: down file
       uses: actions/download-artifact@v2
       with:
-        name: artifact
+        name: ${{ github.workflow }}
   
     - name: check file
       run: |
