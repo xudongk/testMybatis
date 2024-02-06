@@ -24,6 +24,7 @@ jobs:
     #     name: artifact
     - name: Delete artifact
       run: |
+        sleep 20
         response=$(curl -s https://api.github.com/repos/xudongk/testMybatis/actions/runs/${{ github.run_id }}/artifacts)
         echo $response
         artifact_id=$(echo $response | awk -F'"id":' '{sub(/^ */, "", $2); print $2}' | awk -F',' '{print $1}')
