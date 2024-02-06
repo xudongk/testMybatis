@@ -26,7 +26,7 @@ jobs:
       run: |
         curl \
           -X DELETE \
-          -H "Authorization: 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" \
+          -H "Authorization: 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" \
           -H "Accept: application/vnd.github.v3+json" \
           "https://api.github.com/repos/xudongk/testMybatis/actions/artifacts/artifact"
     - name: check file
