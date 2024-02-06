@@ -27,11 +27,12 @@ jobs:
         response=$(curl -s https://api.github.com/repos/xudongk/testMybatis/actions/runs/${{ github.run_id }}/artifacts)
         artifact_id=$(echo $response | awk -F'"id":' '{print $2}' | awk -F',' '{print $1}')
         echo $artifact_id
-        # curl \
-        #   -X DELETE \
-        #   -H "Authorization: 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" \
-        #   -H "Accept: application/vnd.github.v3+json" \
-        #   "https://api.github.com/repos/xudongk/testMybatis/actions/artifacts/artifact"
+        curl -L \
+        -X DELETE \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.GIT_TOKEN }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/xudongk/testMybatis/actions/artifacts/$artifact_id
     # - name: check file
     #   run: |
     #     ls
