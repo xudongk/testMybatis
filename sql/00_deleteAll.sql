@@ -1,1 +1,1 @@
-delete from test;
+delete from test2;
