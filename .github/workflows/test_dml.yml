@@ -27,7 +27,8 @@ jobs:
         done
         echo "COMMIT;" >> new_test.sql
         cat new_test.sql
-        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql
+        mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql > output.txt
+        cat output.txt
     - name: Run pgsql script
       if: ${{ inputs.DBType == 'PGSQL' }}
       run: |
