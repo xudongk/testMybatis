@@ -1,2 +1,2 @@
 delete from public.test;
-delete from public.test2;
+delete from public.test3;
