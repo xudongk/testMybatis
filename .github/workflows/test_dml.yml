@@ -17,6 +17,7 @@ jobs:
     - name: Check mysql file
       if: ${{ inputs.DBType == 'MYSQL' }}
       run: |
+        cd sql
         wrongFiles=$(ls -I "*.sql")
         if [ -n "$wrongFiles" ]; then
           echo These files are not. SQL files:$wrongFiles
@@ -36,6 +37,14 @@ jobs:
         cat new_test.sql
         mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql > output.txt
         cat output.txt
+    - name: Check pgsql file
+      if: ${{ inputs.DBType == 'MYSQL' }}
+      run: |
+        cd pgsql
+        wrongFiles=$(ls -I "*.sql")
+        if [ -n "$wrongFiles" ]; then
+          echo These files are not. SQL files:$wrongFiles
+        fi
     - name: Run pgsql script
       if: ${{ inputs.DBType == 'PGSQL' }}
       run: |
