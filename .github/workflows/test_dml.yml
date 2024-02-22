@@ -20,7 +20,7 @@ jobs:
         cd sql
         wrongFiles=$(ls -I "*.sql")
         if [ -n "$wrongFiles" ]; then
-          echo These files are not. SQL files:$wrongFiles
+          echo These files are not .sql files:$wrongFiles
         fi
     - name: Run mysql script
       if: ${{ inputs.DBType == 'MYSQL' }}
@@ -43,7 +43,7 @@ jobs:
         cd pgsql
         wrongFiles=$(ls -I "*.sql")
         if [ -n "$wrongFiles" ]; then
-          echo These files are not. SQL files:$wrongFiles
+          echo These files are not .sql files:$wrongFiles
         fi
     - name: Run pgsql script
       if: ${{ inputs.DBType == 'PGSQL' }}
