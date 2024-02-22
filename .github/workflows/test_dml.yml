@@ -18,8 +18,8 @@ jobs:
       if: ${{ inputs.DBType == 'MYSQL' }}
       run: |
         wrongFiles=$(ls -I "*.sql")
-        if [ -n "$a" ]; then
-          echo These files are not. SQL files:$a
+        if [ -n "$wrongFiles" ]; then
+          echo These files are not. SQL files:$wrongFiles
         fi
     - name: Run mysql script
       if: ${{ inputs.DBType == 'MYSQL' }}
