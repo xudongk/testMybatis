@@ -38,7 +38,7 @@ jobs:
         mysql -h 175.27.254.42 -P 3306 -u root -pPpe7LDR6FBWpL4Me -D fc < new_test.sql > output.txt
         cat output.txt
     - name: Check pgsql file
-      if: ${{ inputs.DBType == 'MYSQL' }}
+      if: ${{ inputs.DBType == 'PGSQL' }}
       run: |
         cd pgsql
         wrongFiles=$(ls -I "*.sql")
