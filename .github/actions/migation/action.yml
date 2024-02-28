@@ -72,9 +72,9 @@ runs:
         export MIGRATIONS_HOME=${{ steps.setConfig.outputs.path }}
         export PATH="$MIGRATIONS_HOME/bin:$PATH"
         cd mybatis-migrations-3.3.9/workspace/
-        migrate status
+        echo before $(migrate status)
         migrate up
-        migrate status
+        echo after $(migrate status)
     - name: DB Fallback
       if: ${{ failure() || inputs.DeployType == 'FB' }}
       env:
