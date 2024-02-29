@@ -56,7 +56,7 @@ runs:
       run: |
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
-        get ${{inputs.remotDir}}/${{inputs.stepName}} ${{inputs.stepName}}.tar.gz
+        get ${{inputs.remotDir}}/${{inputs.stepName}}.tar.gz ${{inputs.stepName}}.tar.gz
         EOF
         tar -vxf ${{inputs.stepName}}.tar.gz
     - name: ftp delete
