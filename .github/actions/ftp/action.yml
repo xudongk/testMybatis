@@ -39,7 +39,7 @@ runs:
       if: ${{ inputs.type == 'UPLOAD' }}
       run: |
         #压缩文件夹下所有文件
-        tar -czvf ${{inputs.stepName}}.tar.gz ./
+        tar -czvf ${{inputs.stepName}}.tar.gz ./file
         ls
     - name: ftp upload
       shell: bash
