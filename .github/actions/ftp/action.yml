@@ -34,13 +34,17 @@ runs:
         else
             echo "FTP is already installed."
         fi
+    - name: tar fils
+      shell: bash
+      if: ${{ inputs.type == 'UPLOAD' }}
+      run: |
+        #压缩文件夹下所有文件
+        tar -czvf ${{inputs.stepName}}.tar.gz ./
+        ls
     - name: ftp upload
       shell: bash
       if: ${{ inputs.type == 'UPLOAD' }}
       run: |
-        ls
-        #压缩文件夹下所有文件
-        tar -czvf ${{inputs.stepName}}.tar.gz ./
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
         passive
