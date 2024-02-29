@@ -47,7 +47,6 @@ runs:
       run: |
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
-        #passive
         mkdir ${{inputs.remotDir}}
         put ${{inputs.stepName}}.tar.gz ${{inputs.remotDir}}/${{inputs.stepName}}.tar.gz
         EOF
@@ -57,7 +56,6 @@ runs:
       run: |
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
-        #passive
         get ${{inputs.remotDir}}/${{inputs.stepName}} ${{inputs.stepName}}.tar.gz
         EOF
         tar -vxf ${{inputs.stepName}}.tar.gz
@@ -67,7 +65,6 @@ runs:
       run: |
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
-        #passive
         cd ${{inputs.remotDir}}
         mdelete *
         cd ..
