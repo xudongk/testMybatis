@@ -65,6 +65,7 @@ runs:
         user ${{inputs.user}} ${{inputs.password}}
         cd ${{inputs.remotDir}}
         mdelete *
+        Y
         cd ..
         rmdir ${{inputs.remotDir}}
         EOF
