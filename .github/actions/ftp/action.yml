@@ -1,0 +1,68 @@
+name: ftp tool
+on:
+  workflow_call:
+    inputs:
+      server:
+        required: true
+        type: string
+      type:
+        required: true
+        type: string
+      user:
+        type: string
+      password:
+        type: string
+        required: true
+      remotDir:
+        type: string
+        required: true
+      stepName:
+        type: string
+        required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: set ftp tool
+      shell: bash
+      run: |
+        if ! command -v ftp &> /dev/null; then
+            echo "FTP is not installed. Installing..."
+            sudo apt update
+            sudo apt install -y ftp
+        else
+            echo "FTP is already installed."
+        fi
+    - name: ftp upload
+      if: ${{ inputs.type == 'UPLOAD' }}
+      run: |
+        #压缩文件夹下所有文件
+        tar -czvf ${{input.stepName}}.tar.gz ./
+        ftp -n ${{inputs.server}} <<EOF
+        user ${{inputs.user}} ${{inputs.password}}
+        passive
+        mkdir ${{inputs.remotDir}}
+        put ${inputs.stepName}.tar.gz ${{inputs.remotDir}}/${inputs.stepName}.tar.gz
+        EOF
+    - name: ftp download
+      if: ${{ inputs.type == 'DOWNLOAD' }}
+      run: |
+        ftp -n ${{inputs.server}} <<EOF
+        user ${{inputs.user}} ${{inputs.password}}
+        passive
+        get ${{inputs.remotDir}}/${inputs.stepName} ${inputs.stepName}.tar.gz
+        EOF
+        tar -vxf ${inputs.stepName}.tar.gz
+    - name: ftp delete
+      if: ${{ inputs.type == 'DELETE' }}
+      run: |
+        ftp -n ${{inputs.server}} <<EOF
+        user ${{inputs.user}} ${{inputs.password}}
+        passive
+        cd ${{inputs.remotDir}}
+        mdelete *
+        cd ..
+        rmdir ${{inputs.remotDir}}
+        EOF
+        
