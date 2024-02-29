@@ -35,10 +35,11 @@ runs:
             echo "FTP is already installed."
         fi
     - name: ftp upload
+      shell: bash
       if: ${{ inputs.type == 'UPLOAD' }}
       run: |
         #压缩文件夹下所有文件
-        tar -czvf ${{input.stepName}}.tar.gz ./
+        tar -czvf ${{inputs.stepName}}.tar.gz ./
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
         passive
@@ -46,6 +47,7 @@ runs:
         put ${inputs.stepName}.tar.gz ${{inputs.remotDir}}/${inputs.stepName}.tar.gz
         EOF
     - name: ftp download
+      shell: bash
       if: ${{ inputs.type == 'DOWNLOAD' }}
       run: |
         ftp -n ${{inputs.server}} <<EOF
@@ -55,6 +57,7 @@ runs:
         EOF
         tar -vxf ${inputs.stepName}.tar.gz
     - name: ftp delete
+      shell: bash
       if: ${{ inputs.type == 'DELETE' }}
       run: |
         ftp -n ${{inputs.server}} <<EOF
