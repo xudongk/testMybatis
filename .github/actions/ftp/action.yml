@@ -38,13 +38,14 @@ runs:
       shell: bash
       if: ${{ inputs.type == 'UPLOAD' }}
       run: |
+        ls
         #压缩文件夹下所有文件
         tar -czvf ${{inputs.stepName}}.tar.gz ./
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
         passive
         mkdir ${{inputs.remotDir}}
-        put ${inputs.stepName}.tar.gz ${{inputs.remotDir}}/${inputs.stepName}.tar.gz
+        put ${{inputs.stepName}}.tar.gz ${{inputs.remotDir}}/${{inputs.stepName}}.tar.gz
         EOF
     - name: ftp download
       shell: bash
@@ -53,9 +54,9 @@ runs:
         ftp -n ${{inputs.server}} <<EOF
         user ${{inputs.user}} ${{inputs.password}}
         passive
-        get ${{inputs.remotDir}}/${inputs.stepName} ${inputs.stepName}.tar.gz
+        get ${{inputs.remotDir}}/${{inputs.stepName}} ${{inputs.stepName}}.tar.gz
         EOF
-        tar -vxf ${inputs.stepName}.tar.gz
+        tar -vxf ${{inputs.stepName}}.tar.gz
     - name: ftp delete
       shell: bash
       if: ${{ inputs.type == 'DELETE' }}
