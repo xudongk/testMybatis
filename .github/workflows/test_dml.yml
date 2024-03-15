@@ -22,16 +22,13 @@ jobs:
         if [ -n "$wrongFiles" ]; then
           echo These files are not .sql files:$wrongFiles
         fi
-    - name: Setup MySQL Client
-      uses: dvlsg/setup-mysql@v1
-      with:
-        version: '5.7'
     - name: Run mysql script
       if: ${{ inputs.DBType == 'MYSQL' }}
       run: |
         ls
         # # 安装 mysql-client
-        # sudo apt-get update
+        sudo apt-get update
+        sudo apt-get install mysql-shell
         # sudo apt-get install mysql-client -y
         echo "START TRANSACTION;" > new_test.sql
         for file in $(ls -r sql/*.sql | sort -t_ -k1,1n); do
