@@ -25,10 +25,10 @@ jobs:
     - name: Run mysql script
       if: ${{ inputs.DBType == 'MYSQL' }}
       run: |
-        ls
         # # 安装 mysql-client
         sudo apt-get update
-        sudo apt-get install mysql-shell
+        sudo apt-get -f install
+        sudo dpkg -i mysql-shell_8.3.0-1ubuntu23.10_amd64.deb
         # sudo apt-get install mysql-client -y
         echo "START TRANSACTION;" > new_test.sql
         for file in $(ls -r sql/*.sql | sort -t_ -k1,1n); do
